@@ -70,14 +70,36 @@ sumNums(9, 5, add);
 //problem function 4:
 function multiplyNums(x, y, cb) {
   // multiplyNums multiplies two numbers and passes the result to the callback.
+  console.log(cb(x, y));
 }
 
+//Arrow function expression for practice.
+//cb:
+const multiply = (x, y) => x*y;
 
+//invocation:
+multiplyNums(5, 10, multiply);
 
+//problem function 5:
 function contains(item, list, cb) {
   // contains checks if an item is present inside of the given array/list.
   // Pass true to the callback if it is, otherwise pass false.
+  console.log(cb(item, list));
 }
+
+//Since we are looking for 'item' in the 'list' and are looking to return a boolean value (true or false),
+//I'll use array.includes().
+
+//cb:
+function arrayFilterCB(item, list) {
+  return list.includes(item);
+}
+
+//invocation:
+contains('Notebook', items, arrayFilterCB);
+//2nd invocation to show cb functionality with boolean responses.
+contains('Markers', items, arrayFilterCB);
+
 
 /* STRETCH PROBLEM */
 
