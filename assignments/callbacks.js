@@ -24,22 +24,55 @@ const items = ['Pencil', 'Notebook', 'yo-yo', 'Gum'];
 
 */
 
-
+//problem function 1:
 function getLength(arr, cb) {
   // getLength passes the length of the array into the callback.
+  console.log(cb(arr));
 }
 
+//cb:
+function obtainLength(array) {
+  return array.length;
+}
+
+//invocation:
+getLength(items, obtainLength);
+
+//problem function 2:
 function last(arr, cb) {
   // last passes the last item of the array into the callback.
+  console.log(cb(arr));
 }
 
+//cb:
+//writing callback as an anonymous arrow function
+last(items, items => items[items.length -1]);
+//Arrow functions are tricky for me, wanted to rewrite it for practice.
+// last(items, items => {
+//   return items[items.length -1];
+// })
+
+//problem function 3:
 function sumNums(x, y, cb) {
   // sumNums adds two numbers (x, y) and passes the result to the callback.
+  console.log(cb(x, y));
 }
 
+//cb:
+function add(x, y) {
+  return x + y;
+}
+
+//invocation:
+sumNums(9, 5, add);
+
+
+//problem function 4:
 function multiplyNums(x, y, cb) {
   // multiplyNums multiplies two numbers and passes the result to the callback.
 }
+
+
 
 function contains(item, list, cb) {
   // contains checks if an item is present inside of the given array/list.
