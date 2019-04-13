@@ -1,6 +1,14 @@
 // ==== Challenge 1: Write your own closure ====
 // Write a simple closure of your own creation.  Keep it simple!
 
+const lastName = 'Anderson';
+function closureExample () {
+  let firstName = 'Jake';
+  return firstName + " " + lastName;
+}
+console.log(closureExample());
+firstName = 'Jacob'; //This will not update because it's outside of the lexical scope of the function closureExample(). Once the function runs, it changes firstName back to 'Jake'.
+console.log(closureExample());
 
 /* STRETCH PROBLEMS, Do not attempt until you have completed all previous tasks for today's project files */
 

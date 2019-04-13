@@ -55,29 +55,122 @@ const runners = [{"id":1,"first_name":"Charmain","last_name":"Seiler","email":"c
 
 // ==== Challenge 1: Use .forEach() ====
 // The event director needs both the first and last names of each runner for their running bibs.  Combine both the first and last names into a new array called fullName. 
-let fullName = [];
+
+//Function to be run through .forEach().
+function obtainNameList(arr) {
+    let namesArray = [];
+    arr.forEach(function(obj) {
+        namesArray.push(obj.first_name + " " + obj.last_name);
+    });
+    return namesArray;
+}
+
+let fullName = obtainNameList(runners);
 console.log(fullName);
 
 // ==== Challenge 2: Use .map() ====
 // The event director needs to have all the runner's first names converted to uppercase because the director BECAME DRUNK WITH POWER. Convert each first name into all caps and log the result
-let allCaps = [];
+
+//Function to be run through .map().
+function capFirstName(obj) {
+    let nameCaps = obj.first_name.toUpperCase();
+    return nameCaps;
+}
+
+let allCaps = runners.map(capFirstName);
 console.log(allCaps); 
 
 // ==== Challenge 3: Use .filter() ====
 // The large shirts won't be available for the event due to an ordering issue.  Get a list of runners with large sized shirts so they can choose a different size. Return an array named largeShirts that contains information about the runners that have a shirt size of L and log the result
-let largeShirts = [];
+
+function largeShirtRunners(obj) {
+    if (obj.shirt_size === 'L') {
+        return obj;
+    }
+}
+
+let largeShirts = runners.filter(largeShirtRunners);
 console.log(largeShirts);
 
 // ==== Challenge 4: Use .reduce() ====
 // The donations need to be tallied up and reported for tax purposes. Add up all the donations into a ticketPriceTotal array and log the result
-let ticketPriceTotal = [];
+
+//using .forEach() to extract the donation amounts from each object in the runners array.
+function obtainDonations(arr) {
+    let donationsArray = [];
+    arr.forEach(function(obj) {
+        donationsArray.push(obj.donation);
+    });
+    return  donationsArray;
+}
+
+let donations = obtainDonations(runners);
+
+//Using .reduce() to add all the extracted donations values in the donations array together, creating the total.
+let ticketPriceTotal = "Donation total: $" + donations.reduce(function (accumulator, currentValue) {
+    return accumulator + currentValue;
+});
 console.log(ticketPriceTotal);
 
 // ==== Challenge 5: Be Creative ====
 // Now that you have used .forEach(), .map(), .filter(), and .reduce().  I want you to think of potential problems you could solve given the data set and the 5k fun run theme.  Try to create and then solve 3 unique problems using one or many of the array methods listed above.
 
-// Problem 1
+// Problem 1:
 
-// Problem 2
+    //.forEach() --> Run a function to extract first name, last name and contact info (in this case, email).
+    
+//function for runners array using .forEach():
+function getContactInfo (arr) {
+    let contactArray = [];
+    arr.forEach(function(obj) {
+        let fullName = "Name: " + obj.first_name + " " + obj.last_name;
+        let email = "Email: " + obj.email;
+        let contactInfo = fullName + ", " + email;
+        contactArray.push(contactInfo);
+    });
+    return contactArray;
+}
 
-// Problem 3
+let runnerContactInfo = getContactInfo(runners);
+console.log(runnerContactInfo);
+
+// Problem 2:
+
+    //.map() --> Run a function to extract full names and company info.
+
+//if extracting full names and company info for one:
+function nameAndCompany(obj) {
+    let nameCompanyArray = [];
+    let fullName = obj.first_name + " " + obj.last_name;
+    let company = obj.company_name;
+    return "Name: " + fullName + ", Company: " + company;
+}
+
+//Function .map() for entire array:
+
+let runnerNameAndCompany = runners.map(nameAndCompany);
+console.log(runnerNameAndCompany);
+
+
+
+// Problem 3:
+
+    //.filter() --> Run a function to tally up how many of each size (ex. how many XL's).
+
+function getSizeTally(arr, size) {
+    let sizeTally = 0;
+    arr.filter(function (obj) {
+        if (obj.shirt_size === size) {
+            sizeTally++;
+        }
+    });
+    return size + " size count: " + sizeTally;
+}
+
+console.log(getSizeTally(runners, 'XS'));
+console.log(getSizeTally(runners, 'S'));
+console.log(getSizeTally(runners, 'M'));
+console.log(getSizeTally(runners, 'L'));
+console.log(getSizeTally(runners, 'XL'));
+console.log(getSizeTally(runners, '2XL'));
+console.log(getSizeTally(runners, '3XL'));
